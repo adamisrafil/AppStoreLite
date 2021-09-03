@@ -23,11 +23,6 @@ class AppInfoViewController: UIViewController {
         super.viewWillLayoutSubviews()
         
         updateViews()
-        
-        let contentRect: CGRect = appInfoScrollView.subviews.reduce(into: .zero) { rect, view in
-            rect = rect.union(view.frame)
-        }
-        appInfoScrollView.contentSize = contentRect.size
     }
     
     init(_ model: iTunesSearchResultModel) {
@@ -61,7 +56,7 @@ class AppInfoViewController: UIViewController {
         let supportedDevices = model.supportedDevices.filter({
             $0.contains("iPhone")
         })
-        supportedDevicesLabel.text = "Supported Devices: \(supportedDevices.joined(separator: ", "))"
+        supportedDevicesLabel.text = "Supported Devices: \(supportedDevices.reversed().joined(separator: ", "))" // Show newer devices first
         ratingLabel.text = "Rating: \(String(format: "%.2f", model.averageUserRatingForCurrentVersion)) in \(model.userRatingCountForCurrentVersion) Reviews"
         
         if let iconURL = URL(string: model.artworkUrl60) {
