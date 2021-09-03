@@ -32,7 +32,6 @@ struct iTunesAppModel: Codable {
     var averageUserRatingForCurrentVersion: Double
     var contentAdvisoryRating: String
     var description: String
-    var features: [String]
     var fileSizeBytes: String
     var formattedPrice: String
     var genres: [String]
@@ -59,7 +58,6 @@ struct iTunesAppModel: Codable {
         averageUserRatingForCurrentVersion = try container.decode(Double.self, forKey: .averageUserRatingForCurrentVersion)
         contentAdvisoryRating = try container.decode(String.self, forKey: .contentAdvisoryRating)
         description = try container.decode(String.self, forKey: .description)
-        features = try container.decode([String].self, forKey: .features)
         fileSizeBytes = try container.decode(String.self, forKey: .fileSizeBytes)
         formattedPrice = try container.decode(String.self, forKey: .formattedPrice)
         genres = try container.decode([String].self, forKey: .genres)
