@@ -42,6 +42,16 @@ class AppSearchViewController: UIViewController, UITableViewDelegate, UITableVie
         
         appListTableCellData = filterSearchResults
         appResultTableView.reloadData()
+        
+        filterView.isHidden = true
+    }
+    
+    
+    func didPressResetFilterButton() {
+        appListTableCellData = unfilteredAppListTableCellData
+        appResultTableView.reloadData()
+        
+        filterView.isHidden = true
     }
     
     // MARK: UITableView
@@ -195,7 +205,7 @@ class AppSearchViewController: UIViewController, UITableViewDelegate, UITableVie
         
         let filterViewWidth = view.frame.width * 0.65
         let filterViewX = (view.frame.maxX - filterViewWidth) - 10
-        let filterViewFrame = CGRect(x: filterViewX, y: view.frame.height * 0.15, width: filterViewWidth, height: filterViewWidth * 1.5)
+        let filterViewFrame = CGRect(x: filterViewX, y: view.frame.height * 0.12, width: filterViewWidth, height: filterViewWidth * 1.5)
         filterView = FilterView(frame: filterViewFrame)
         filterView.isHidden = true
         filterView.delegate = self

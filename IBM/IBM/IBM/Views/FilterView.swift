@@ -11,7 +11,7 @@ import UIKit
 protocol FilterViewDelegate: AnyObject {
     func didPressBackButton(_ filterView: FilterView)
     func didPressFilterButton(genreFilter: GenresFilters, priceFilter: AppPriceFilter)
-    // func didPressResetFilterButton()
+    func didPressResetFilterButton()
 }
 
 class FilterView: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
@@ -23,8 +23,7 @@ class FilterView: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
         super.init(frame: filterViewFrame)
         
         setupViews()
-        backButton.layer.cornerRadius = backButton.frame.height / 2
-        filterButton.layer.cornerRadius = filterButton.frame.height / 2
+        updateViews()
     }
     
     required init?(coder: NSCoder) {
@@ -75,43 +74,65 @@ class FilterView: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
         delegate?.didPressFilterButton(genreFilter: genre, priceFilter: price)
     }
     
+    @objc private func didPressResetFilterButton() {
+        genrePickerView.reloadAllComponents()
+        pricePickerView.reloadAllComponents()
+        genrePickerView.selectRow(0, inComponent: 0, animated: true)
+        pricePickerView.selectRow(0, inComponent: 0, animated: true)
+        
+        delegate?.didPressResetFilterButton()
+    }
+    
     // MARK: Views
     
     private var backButton: UIButton!
     private var genrePickerView: UIPickerView!
     private var pricePickerView: UIPickerView!
     private var filterButton: UIButton!
+    private var resetFilterButton: UIButton!
     
     private func setupViews() {
         
         self.backgroundColor = #colorLiteral(red: 0.09562460333, green: 0, blue: 0.3830236197, alpha: 1)
         self.layer.cornerRadius = 5
-        let backButtonTextSize: CGFloat = 15.0
+        let buttonTextSize: CGFloat = 15.0
         
         backButton = UIButton()
         backButton.addTarget(self, action: #selector(didPressBackButton), for: .touchUpInside)
         backButton.setTitle("X", for: .normal)
         backButton.setTitleColor(.white, for: .normal)
-        backButton.titleLabel?.font = UIFont.systemFont(ofSize: backButtonTextSize, weight: .bold)
+        backButton.titleLabel?.font = UIFont.systemFont(ofSize: buttonTextSize, weight: .bold)
         backButton.layer.borderColor = UIColor.white.cgColor
         backButton.layer.borderWidth = 1
         self.addSubview(backButton)
         
-        let backButtonTitleSize = (backButton.currentTitle! as NSString).size(withAttributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: backButtonTextSize)])
+        let backButtonTitleSize = (backButton.currentTitle! as NSString).size(withAttributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: buttonTextSize)])
         backButton.frame = CGRect(x: 5, y: 5, width: backButtonTitleSize.height * 1.5, height: backButtonTitleSize.height * 1.5)
         
         filterButton = UIButton()
         filterButton.addTarget(self, action: #selector(didPressFilterButton), for: .touchUpInside)
         filterButton.setTitle("Filter", for: .normal)
         filterButton.setTitleColor(.white, for: .normal)
-        filterButton.titleLabel?.font = UIFont.systemFont(ofSize: backButtonTextSize, weight: .bold)
+        filterButton.titleLabel?.font = UIFont.systemFont(ofSize: buttonTextSize, weight: .bold)
         filterButton.layer.borderColor = UIColor.white.cgColor
         filterButton.layer.borderWidth = 1
         self.addSubview(filterButton)
         
-        let filterButtonTitleSize = (filterButton.currentTitle! as NSString).size(withAttributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: backButtonTextSize)])
+        let filterButtonTitleSize = (filterButton.currentTitle! as NSString).size(withAttributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: buttonTextSize)])
         let yPos = (self.frame.height - filterButtonTitleSize.height * 1.5) - 5
         filterButton.frame = CGRect(x: 5, y: yPos, width: filterButtonTitleSize.width * 1.5, height: filterButtonTitleSize.height * 1.5)
+        
+        resetFilterButton = UIButton()
+        resetFilterButton.addTarget(self, action: #selector(didPressResetFilterButton), for: .touchUpInside)
+        resetFilterButton.setTitle("Reset", for: .normal)
+        resetFilterButton.setTitleColor(.white, for: .normal)
+        resetFilterButton.titleLabel?.font = UIFont.systemFont(ofSize: buttonTextSize, weight: .bold)
+        resetFilterButton.layer.borderColor = UIColor.white.cgColor
+        resetFilterButton.layer.borderWidth = 1
+        self.addSubview(resetFilterButton)
+        
+        let resetButtonTitleSize = (resetFilterButton.currentTitle! as NSString).size(withAttributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: buttonTextSize)])
+        resetFilterButton.frame = CGRect(x: filterButton.frame.maxX + 10, y: yPos, width: resetButtonTitleSize.width * 1.5, height: filterButtonTitleSize.height * 1.5)
         
         let genreLabel = UILabel(frame: CGRect(x: 5, y: backButton.frame.maxY + 10, width: filterViewFrame.width, height: 18))
         genreLabel.text = "Genre:"
@@ -130,5 +151,11 @@ class FilterView: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
         pricePickerView.dataSource = self
         pricePickerView.delegate = self
         self.addSubview(pricePickerView)
+    }
+    
+    private func updateViews() {
+        backButton.layer.cornerRadius = backButton.frame.height / 2
+        filterButton.layer.cornerRadius = filterButton.frame.height / 2
+        resetFilterButton.layer.cornerRadius = resetFilterButton.frame.height / 2
     }
 }
