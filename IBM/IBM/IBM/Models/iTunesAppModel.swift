@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct iTunesSearchResultArrayModel: Codable {
+struct iTunesSearchResultModel: Codable {
     
     var resultCount: Int
     var results: [iTunesAppModel]

@@ -32,7 +32,7 @@ final class iTunesAPIManager {
             }
             
             do {
-                let appList = try JSONDecoder().decode(iTunesSearchResultArrayModel.self, from: data)
+                let appList = try JSONDecoder().decode(iTunesSearchResultModel.self, from: data)
                 
                 completion(appList.results, nil)
                 return
