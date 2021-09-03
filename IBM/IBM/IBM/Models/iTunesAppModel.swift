@@ -1,5 +1,5 @@
 //
-//  iTunesSearchResultModel.swift
+//  iTunesAppModel.swift
 //  IBM
 //
 //  Created by Adam Israfil on 8/31/21.
@@ -31,7 +31,6 @@ struct iTunesAppModel: Codable {
     var artworkUrl60: String
     var averageUserRatingForCurrentVersion: Double
     var contentAdvisoryRating: String
-    var currentVersionReleaseDate: String
     var description: String
     var features: [String]
     var fileSizeBytes: String
@@ -41,14 +40,10 @@ struct iTunesAppModel: Codable {
     var minimumOsVersion: String
     var price: Double
     var primaryGenreName: String
-    var releaseDate: String
-    var releaseNotes: String
     var screenshotUrls: [String]
     var sellerName: String
     var supportedDevices: [String]
     var trackName: String
-    var trackViewUrl: String
-    var userRatingCount: Int
     var userRatingCountForCurrentVersion: Int
     var version: String
 
@@ -63,7 +58,6 @@ struct iTunesAppModel: Codable {
         artworkUrl60 = try container.decode(String.self, forKey: .artworkUrl60)
         averageUserRatingForCurrentVersion = try container.decode(Double.self, forKey: .averageUserRatingForCurrentVersion)
         contentAdvisoryRating = try container.decode(String.self, forKey: .contentAdvisoryRating)
-        currentVersionReleaseDate = try container.decode(String.self, forKey: .currentVersionReleaseDate)
         description = try container.decode(String.self, forKey: .description)
         features = try container.decode([String].self, forKey: .features)
         fileSizeBytes = try container.decode(String.self, forKey: .fileSizeBytes)
@@ -73,14 +67,10 @@ struct iTunesAppModel: Codable {
         minimumOsVersion = try container.decode(String.self, forKey: .minimumOsVersion)
         price = try container.decode(Double.self, forKey: .price)
         primaryGenreName = try container.decode(String.self, forKey: .primaryGenreName)
-        releaseDate = try container.decode(String.self, forKey: .releaseDate)
-        releaseNotes = try container.decode(String.self, forKey: .releaseNotes)
         screenshotUrls = try container.decode([String].self, forKey: .screenshotUrls)
         sellerName = try container.decode(String.self, forKey: .sellerName)
         supportedDevices = try container.decode([String].self, forKey: .supportedDevices)
         trackName = try container.decode(String.self, forKey: .trackName)
-        trackViewUrl = try container.decode(String.self, forKey: .trackViewUrl)
-        userRatingCount = try container.decode(Int.self, forKey: .userRatingCount)
         userRatingCountForCurrentVersion = try container.decode(Int.self, forKey: .userRatingCountForCurrentVersion)
         version = try container.decode(String.self, forKey: .version)
     }
