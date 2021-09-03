@@ -1,5 +1,5 @@
-# IBM
-IBM Take Home Assessment by Adam Israfil
+# AppStoreLite
+IBM Take Home Assessment Project Solution by Adam Israfil
 
 ### Screenshots
 
