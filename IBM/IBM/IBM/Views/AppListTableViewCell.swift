@@ -35,7 +35,7 @@ class AppListTableViewCell: UITableViewCell {
     
     // MARK: Public
     
-    func populate(_ model: iTunesSearchResultModel) {
+    func populate(_ model: iTunesAppModel) {
         nameLabel.text = model.trackName
         
         guard let IconURL = URL(string: model.artworkUrl60) else { return }

@@ -10,18 +10,18 @@ import Foundation
 struct iTunesSearchResultArrayModel: Codable {
     
     var resultCount: Int
-    var results: [iTunesSearchResultModel]
+    var results: [iTunesAppModel]
     
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
         resultCount = try container.decode(Int.self, forKey: .resultCount)
 
-        let appResponses = try container.decode([iTunesSearchResultModel].self, forKey: .results)
+        let appResponses = try container.decode([iTunesAppModel].self, forKey: .results)
         results = appResponses
     }
 }
 
-struct iTunesSearchResultModel: Codable {
+struct iTunesAppModel: Codable {
     
     var advisories: [String]
     var artistName: String

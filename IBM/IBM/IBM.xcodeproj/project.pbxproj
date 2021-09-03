@@ -16,7 +16,7 @@
 		AEEFF9E526DE9A7200540224 /* iTunesAPIManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEFF9E426DE9A7200540224 /* iTunesAPIManager.swift */; };
 		AEEFF9E726DE9C1C00540224 /* AppInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEFF9E626DE9C1C00540224 /* AppInfoViewController.swift */; };
 		AEEFF9E926DE9E5F00540224 /* iTunesQueryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEFF9E826DE9E5F00540224 /* iTunesQueryModel.swift */; };
-		AEEFF9EB26DE9E8B00540224 /* iTunesSearchResultModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEFF9EA26DE9E8B00540224 /* iTunesSearchResultModel.swift */; };
+		AEEFF9EB26DE9E8B00540224 /* iTunesAppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEFF9EA26DE9E8B00540224 /* iTunesAppModel.swift */; };
 		AEEFF9F026DFEAA900540224 /* FilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEEFF9EF26DFEAA900540224 /* FilterView.swift */; };
 /* End PBXBuildFile section */
 
@@ -32,7 +32,7 @@
 		AEEFF9E426DE9A7200540224 /* iTunesAPIManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iTunesAPIManager.swift; sourceTree = "<group>"; };
 		AEEFF9E626DE9C1C00540224 /* AppInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInfoViewController.swift; sourceTree = "<group>"; };
 		AEEFF9E826DE9E5F00540224 /* iTunesQueryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iTunesQueryModel.swift; sourceTree = "<group>"; };
-		AEEFF9EA26DE9E8B00540224 /* iTunesSearchResultModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iTunesSearchResultModel.swift; sourceTree = "<group>"; };
+		AEEFF9EA26DE9E8B00540224 /* iTunesAppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iTunesAppModel.swift; sourceTree = "<group>"; };
 		AEEFF9EF26DFEAA900540224 /* FilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -91,7 +91,7 @@
 			isa = PBXGroup;
 			children = (
 				AEEFF9E826DE9E5F00540224 /* iTunesQueryModel.swift */,
-				AEEFF9EA26DE9E8B00540224 /* iTunesSearchResultModel.swift */,
+				AEEFF9EA26DE9E8B00540224 /* iTunesAppModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -194,7 +194,7 @@
 			files = (
 				AEEFF9E526DE9A7200540224 /* iTunesAPIManager.swift in Sources */,
 				AEEFF9D026DE8C9400540224 /* AppSearchViewController.swift in Sources */,
-				AEEFF9EB26DE9E8B00540224 /* iTunesSearchResultModel.swift in Sources */,
+				AEEFF9EB26DE9E8B00540224 /* iTunesAppModel.swift in Sources */,
 				AEEFF9F026DFEAA900540224 /* FilterView.swift in Sources */,
 				AEEFF9E926DE9E5F00540224 /* iTunesQueryModel.swift in Sources */,
 				AEACA5D526E066A100F2D9E4 /* AppListTableViewCell.swift in Sources */,

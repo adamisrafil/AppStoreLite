@@ -112,11 +112,11 @@ class AppSearchViewController: UIViewController, UITableViewDelegate, UITableVie
     
     // MARK: Private
     
-    private var appListTableCellData = [iTunesSearchResultModel]()
-    private var unfilteredAppListTableCellData = [iTunesSearchResultModel]()
+    private var appListTableCellData = [iTunesAppModel]()
+    private var unfilteredAppListTableCellData = [iTunesAppModel]()
     private let tableViewCellReuseIdentifier = "AppListTableViewCell"
     
-    private func didSelectApp(_ app: iTunesSearchResultModel) {
+    private func didSelectApp(_ app: iTunesAppModel) {
         self.navigationController?.pushViewController(AppInfoViewController(app), animated: true)
     }
     
@@ -137,7 +137,7 @@ class AppSearchViewController: UIViewController, UITableViewDelegate, UITableVie
         }
     }
     
-    private func filterGenre(_ prefilter: [iTunesSearchResultModel], genre: GenresFilters) -> [iTunesSearchResultModel] {
+    private func filterGenre(_ prefilter: [iTunesAppModel], genre: GenresFilters) -> [iTunesAppModel] {
         var filteredResult = prefilter
         
         filteredResult = filteredResult.filter({
@@ -147,7 +147,7 @@ class AppSearchViewController: UIViewController, UITableViewDelegate, UITableVie
         return filteredResult
     }
     
-    private func filterPrice(_ prefilter: [iTunesSearchResultModel], price: AppPriceFilter) -> [iTunesSearchResultModel] {
+    private func filterPrice(_ prefilter: [iTunesAppModel], price: AppPriceFilter) -> [iTunesAppModel] {
         var filteredResult = prefilter
         
         if price == .free {

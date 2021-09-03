@@ -25,7 +25,7 @@ class AppInfoViewController: UIViewController {
         updateViews()
     }
     
-    init(_ model: iTunesSearchResultModel) {
+    init(_ model: iTunesAppModel) {
         self.model = model
         
         super.init(nibName: nil, bundle: nil)
@@ -37,7 +37,7 @@ class AppInfoViewController: UIViewController {
     
     // MARK: Private
     
-    private var model: iTunesSearchResultModel
+    private var model: iTunesAppModel
     private var appScreenshots = [UIImage?]()
     private var currentImageIndex = 0
     

@@ -11,7 +11,7 @@ final class iTunesAPIManager {
     
     // MARK: Public
     
-    func getSoftwareForSearchTerm(searchTerm: String, completion: @escaping (_ appList: [iTunesSearchResultModel]?, _ errorMessage: String?) -> Void) {
+    func getSoftwareForSearchTerm(searchTerm: String, completion: @escaping (_ appList: [iTunesAppModel]?, _ errorMessage: String?) -> Void) {
         guard let url = buildURLFromTerm(searchTerm: searchTerm) else {
             completion(nil, "Could not genertate URL")
             return
