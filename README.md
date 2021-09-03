@@ -1,5 +1,5 @@
 # IBM
-IBM Take Home Assessment 
+IBM Take Home Assessment by Adam Israfil
 
 ### Screenshots
 
