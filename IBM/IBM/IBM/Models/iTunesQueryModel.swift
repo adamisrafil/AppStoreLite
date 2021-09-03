@@ -7,6 +7,8 @@
 
 import Foundation
 
+// Not currently implemented in this project but part of API
+
 struct iTunesQueryModel {
     
     var term: String
@@ -15,8 +17,6 @@ struct iTunesQueryModel {
     var limit: Int?
     var explicit: Bool?
     var entity: String?
-    
-    // Not currently implemented but part of API
     var attribute: String?
     var callback: String?
     var lang: String?
