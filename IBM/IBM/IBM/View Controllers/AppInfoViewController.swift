@@ -60,6 +60,7 @@ class AppInfoViewController: UIViewController {
         supportedDevicesLabel.text = "Supported Devices: \(supportedDevices.reversed().joined(separator: ", "))" // Show newer devices first
         ratingLabel.text = "Rating: \(String(format: "%.2f", model.averageUserRatingForCurrentVersion)) in \(model.userRatingCountForCurrentVersion) Reviews"
         
+        languagesLabel.text = "Languages: \(model.languageCodesISO2A.joined(separator: ", "))"
         if let iconURL = URL(string: model.artworkUrl60) {
             downloadIconImage(from: iconURL)
         } else {
@@ -112,7 +113,7 @@ class AppInfoViewController: UIViewController {
     
     @objc private func didPressPreviousImageButton() {
         if currentImageIndex == 0 {
-            currentImageIndex = appScreenshots.count - 1
+            currentImageIndex = appScreenshots.count - 1 // Wrap around to end of the image array
         } else {
             currentImageIndex -= 1
         }
@@ -122,7 +123,7 @@ class AppInfoViewController: UIViewController {
     
     @objc private func didPressNextImageButton() {
         if currentImageIndex + 1 >= appScreenshots.count {
-            currentImageIndex = 0
+            currentImageIndex = 0 // Wrap around to beginning of the image array
         } else {
             currentImageIndex += 1
         }
@@ -153,6 +154,7 @@ class AppInfoViewController: UIViewController {
     private var appInfoScrollView: UIScrollView!
     private var appInfoStackView: UIStackView!
     private var supportedDevicesLabel: UILabel!
+    private var languagesLabel: UILabel!
     
     private func setupViews() {
         self.navigationController?.navigationBar.isHidden = true
@@ -287,6 +289,13 @@ class AppInfoViewController: UIViewController {
         versionLabel.textColor = .white
         versionLabel.font = UIFont.systemFont(ofSize: appInfoSize)
         appInfoStackView.addArrangedSubview(versionLabel)
+        
+        languagesLabel = UILabel()
+        languagesLabel.text = "Languages: "
+        languagesLabel.textColor = .white
+        languagesLabel.numberOfLines = 0
+        languagesLabel.font = UIFont.systemFont(ofSize: appInfoSize)
+        appInfoStackView.addArrangedSubview(languagesLabel)
         
         minimumOSVersionLabel = UILabel()
         minimumOSVersionLabel.text = "Minimum iOS Version: "
