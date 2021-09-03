@@ -62,8 +62,6 @@ class FilterView: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
         return title
     }
     
-    // MARK: Private
-    
     // MARK: Actions
     
     @objc private func didPressBackButton() {

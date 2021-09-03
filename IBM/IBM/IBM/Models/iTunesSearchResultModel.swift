@@ -51,24 +51,6 @@ struct iTunesSearchResultModel: Codable {
     var userRatingCount: Int
     var userRatingCountForCurrentVersion: Int
     var version: String
-    
-    // Unused but part of API
-    //    var appletvScreenshotUrls: [String]
-    //    var artistId: Int
-    //    var averageUserRating: Double
-    //    var bundleId: String
-    //    var currency: String
-    //    var genreIds: [String]
-    //    var ipadScreenshotUrls: [String]
-    //    var isGameCenterEnabled: Bool
-    //    var isVppDeviceBasedLicensingEnabled: Bool
-    //    var kind: String
-    //    var primaryGenreId: Int
-    //    var sellerUrl: String?
-    //    var trackCensoredName: String
-    //    var trackContentRating: String
-    //    var trackId: Int
-    //    var wrapperType: String
 
     init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -101,22 +83,6 @@ struct iTunesSearchResultModel: Codable {
         userRatingCount = try container.decode(Int.self, forKey: .userRatingCount)
         userRatingCountForCurrentVersion = try container.decode(Int.self, forKey: .userRatingCountForCurrentVersion)
         version = try container.decode(String.self, forKey: .version)
-        
-//        appletvScreenshotUrls = try container.decode([String?].self, forKey: .appletvScreenshotUrls)
-//        artistId = try container.decode(Int.self, forKey: .artistId)
-//        averageUserRating = try container.decode(Double.self, forKey: .averageUserRating)
-//        bundleId = try container.decode(String.self, forKey: .bundleId)
-//        currency = try container.decode(String.self, forKey: .currency)
-//        genreIds = try container.decode([String].self, forKey: .genreIds)
-//        ipadScreenshotUrls = try container.decode([String].self, forKey: .ipadScreenshotUrls)
-//        isGameCenterEnabled = try container.decode(Bool.self, forKey: .isGameCenterEnabled)
-//        isVppDeviceBasedLicensingEnabled = try container.decode(Bool.self, forKey: .isVppDeviceBasedLicensingEnabled)
-//        kind = try container.decode(String.self, forKey: .kind)
-//        primaryGenreId = try container.decode(Int.self, forKey: .primaryGenreId)
-//        sellerUrl = try container.decode(String?.self, forKey: .sellerUrl)
-//        trackCensoredName = try container.decode(String.self, forKey: .trackCensoredName)
-//        trackContentRating = try container.decode(String.self, forKey: .trackContentRating)
-//        trackId = try container.decode(Int.self, forKey: .trackId)
     }
 }
 
