@@ -49,7 +49,8 @@ class AppInfoViewController: UIViewController {
         genresLabel.text = "Genres: \(model.genres.joined(separator: ", "))"
         advisoriesLabel.text = "Advisories: \(model.advisories.joined(separator: ", "))"
         ageRecommendationLabel.text = "Recommended For: \(model.contentAdvisoryRating)"
-        appSizeLabel.text = "Size: \(model.fileSizeBytes)"
+        let appSizeWithUnit = ByteCountFormatter.string(fromByteCount: Int64(model.fileSizeBytes) ?? 0, countStyle: .file)
+        appSizeLabel.text = "Size: \(appSizeWithUnit)"
         versionLabel.text = "Version: \(model.version)"
         priceLabel.text = "Price: \(model.formattedPrice)"
         minimumOSVersionLabel.text = "Minimum iOS Version: \(model.minimumOsVersion)"
