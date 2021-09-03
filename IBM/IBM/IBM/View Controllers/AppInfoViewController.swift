@@ -112,20 +112,22 @@ class AppInfoViewController: UIViewController {
     
     @objc private func didPressPreviousImageButton() {
         if currentImageIndex == 0 {
-            return
+            currentImageIndex = appScreenshots.count - 1
         } else {
             currentImageIndex -= 1
-            appScreenshotImageView.image = appScreenshots[currentImageIndex]
         }
+        
+        appScreenshotImageView.image = appScreenshots[currentImageIndex]
     }
     
     @objc private func didPressNextImageButton() {
         if currentImageIndex + 1 >= appScreenshots.count {
-            return
+            currentImageIndex = 0
         } else {
             currentImageIndex += 1
-            appScreenshotImageView.image = appScreenshots[currentImageIndex]
         }
+        
+        appScreenshotImageView.image = appScreenshots[currentImageIndex]
     }
     
     // MARK: Views
