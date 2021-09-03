@@ -10,6 +10,8 @@ import UIKit
 
 class AppInfoViewController: UIViewController {
     
+    // MARK: UIViewController
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -45,6 +47,7 @@ class AppInfoViewController: UIViewController {
     private var currentImageIndex = 0
     
     private func updateAppDetailLabels() {
+        
         titleLabel.text = model.trackName
         descriptionLabel.text = "\(model.description)"
         appCreatorLabel.text = "Creator: \(model.artistName)"
@@ -66,6 +69,7 @@ class AppInfoViewController: UIViewController {
         } else {
             appIconImageView.isHidden = true
         }
+        
         getAppScreenShots()
     }
     
@@ -103,6 +107,8 @@ class AppInfoViewController: UIViewController {
             }
         }
     }
+    
+    // MARK: Actions
     
     @objc private func didPressBackButton() {
         self.navigationController?.popViewController(animated: true)

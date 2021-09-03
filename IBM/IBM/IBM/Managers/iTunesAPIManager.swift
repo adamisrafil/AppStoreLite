@@ -9,6 +9,8 @@ import Foundation
 
 final class iTunesAPIManager {
     
+    // MARK: Public
+    
     func getSoftwareForSearchTerm(searchTerm: String, completion: @escaping (_ appList: [iTunesSearchResultModel]?, _ errorMessage: String?) -> Void) {
         guard let url = buildURLFromTerm(searchTerm: searchTerm) else {
             completion(nil, "Could not genertate URL")
@@ -43,15 +45,17 @@ final class iTunesAPIManager {
         softwareListRequestSession.resume()
     }
     
+    func getImageData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+    }
+    
+    // MARK: Private
+    
     private func buildURLFromTerm(searchTerm: String) -> URL? {
         var URLString = apiConstants.iTunesBaseURL
         URLString += "&term=\(searchTerm)"
         
         return URL(string: URLString)
-    }
-    
-    func getImageData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
-        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
     }
 }
 

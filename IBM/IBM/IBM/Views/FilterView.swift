@@ -16,6 +16,26 @@ protocol FilterViewDelegate: AnyObject {
 
 class FilterView: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
     
+    // MARK: Public
+    
+    override init(frame: CGRect) {
+        filterViewFrame = frame
+        super.init(frame: filterViewFrame)
+        
+        setupViews()
+        backButton.layer.cornerRadius = backButton.frame.height / 2
+        filterButton.layer.cornerRadius = filterButton.frame.height / 2
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    weak var delegate: FilterViewDelegate?
+    private var filterViewFrame: CGRect!
+    
+    // MARK: UIPickerView
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -42,18 +62,9 @@ class FilterView: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
         return title
     }
     
-    override init(frame: CGRect) {
-        filterViewFrame = frame
-        super.init(frame: filterViewFrame)
-        
-        setupViews()
-        backButton.layer.cornerRadius = backButton.frame.height / 2
-        filterButton.layer.cornerRadius = filterButton.frame.height / 2
-    }
+    // MARK: Private
     
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    // MARK: Actions
     
     @objc private func didPressBackButton() {
         delegate?.didPressBackButton(self)
@@ -66,12 +77,11 @@ class FilterView: UIView, UIPickerViewDataSource, UIPickerViewDelegate {
         delegate?.didPressFilterButton(genreFilter: genre, priceFilter: price)
     }
     
-    weak var delegate: FilterViewDelegate?
-    var filterViewFrame: CGRect!
+    // MARK: Views
     
     private var backButton: UIButton!
-    var genrePickerView: UIPickerView!
-    var pricePickerView: UIPickerView!
+    private var genrePickerView: UIPickerView!
+    private var pricePickerView: UIPickerView!
     private var filterButton: UIButton!
     
     private func setupViews() {

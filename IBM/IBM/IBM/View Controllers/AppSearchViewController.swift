@@ -9,10 +9,22 @@ import UIKit
 
 class AppSearchViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate, FilterViewDelegate {
     
+    // MARK: UIViewController
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupViews()
+        
+        self.appResultTableView.register(AppListTableViewCell.self, forCellReuseIdentifier: tableViewCellReuseIdentifier)
+        self.navigationController?.setNavigationBarHidden(true, animated: false)
+    }
+    
+    // MARK: FilterView
+    
     func didPressBackButton(_ filterView: FilterView) {
         filterView.isHidden = true
     }
-    
     
     func didPressFilterButton(genreFilter: GenresFilters, priceFilter: AppPriceFilter) {
         var filterSearchResults = unfilteredAppListTableCellData
@@ -30,82 +42,6 @@ class AppSearchViewController: UIViewController, UITableViewDelegate, UITableVie
         
         appListTableCellData = filterSearchResults
         appResultTableView.reloadData()
-    }
-    
-    func filterGenre(_ prefilter: [iTunesSearchResultModel], genre: GenresFilters) -> [iTunesSearchResultModel] {
-        var filteredResult = prefilter
-        
-        filteredResult = filteredResult.filter({
-            $0.primaryGenreName == genre.description
-        })
-        
-        return filteredResult
-    }
-    
-    func filterPrice(_ prefilter: [iTunesSearchResultModel], price: AppPriceFilter) -> [iTunesSearchResultModel] {
-        var filteredResult = prefilter
-        
-        if price == .free {
-            filteredResult = filteredResult.filter({
-                $0.formattedPrice == price.description
-            })
-        } else if price == .paid {
-            filteredResult = filteredResult.filter({
-                $0.price > 0.00
-            })
-        }
-        
-        return filteredResult
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        setupViews()
-        
-        self.appResultTableView.register(AppListTableViewCell.self, forCellReuseIdentifier: tableViewCellReuseIdentifier)
-        self.navigationController?.setNavigationBarHidden(true, animated: false)
-    }
-    
-    func updateSearchResults(for searchController: UISearchController) {
-        if searchController.isActive {
-            searchController.searchBar.showsBookmarkButton = false
-        } else {
-            searchController.searchBar.showsBookmarkButton = true
-        }
-    }
-    
-    func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
-        filterView.isHidden = false
-    }
-    
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        appListTableCellData.removeAll()
-        unfilteredAppListTableCellData.removeAll()
-        searchController.searchBar.placeholder = "Search for App"
-        
-        appResultTableView.reloadData()
-    }
-    
-    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return view.frame.height * 0.2
-    }
-    
-    func fillDataSource(searchTerm: String) {
-        DispatchQueue.global(qos: .background).async {
-            iTunesAPIManager().getSoftwareForSearchTerm(searchTerm: searchTerm) { resultArray, error in
-                if let resultArray = resultArray {
-                    self.appListTableCellData = resultArray
-                    self.unfilteredAppListTableCellData = resultArray
-                    
-                    DispatchQueue.main.async {
-                        self.appResultTableView.reloadData()
-                    }
-                } else if let error = error {
-                    print(error)
-                }
-            }
-        }
     }
     
     // MARK: UITableView
@@ -140,6 +76,12 @@ class AppSearchViewController: UIViewController, UITableViewDelegate, UITableVie
         cell.backgroundColor = .clear
     }
     
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return view.frame.height * 0.2
+    }
+    
+    // MARK: UISearchController
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         guard let searchBarText = searchController.searchBar.text else { return }
         fillDataSource(searchTerm: searchBarText)
@@ -148,13 +90,80 @@ class AppSearchViewController: UIViewController, UITableViewDelegate, UITableVie
         searchController.searchBar.placeholder = searchBarText
     }
     
-    private func didSelectApp(_ app: iTunesSearchResultModel) {
-        self.navigationController?.pushViewController(AppInfoViewController(app), animated: true)
+    func updateSearchResults(for searchController: UISearchController) {
+        if searchController.isActive {
+            searchController.searchBar.showsBookmarkButton = false
+        } else {
+            searchController.searchBar.showsBookmarkButton = true
+        }
     }
+    
+    func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
+        filterView.isHidden = false
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        appListTableCellData.removeAll()
+        unfilteredAppListTableCellData.removeAll()
+        searchController.searchBar.placeholder = "Search for App"
+        
+        appResultTableView.reloadData()
+    }
+    
+    // MARK: Private
     
     private var appListTableCellData = [iTunesSearchResultModel]()
     private var unfilteredAppListTableCellData = [iTunesSearchResultModel]()
     private let tableViewCellReuseIdentifier = "AppListTableViewCell"
+    
+    private func didSelectApp(_ app: iTunesSearchResultModel) {
+        self.navigationController?.pushViewController(AppInfoViewController(app), animated: true)
+    }
+    
+    private func fillDataSource(searchTerm: String) {
+        DispatchQueue.global(qos: .background).async {
+            iTunesAPIManager().getSoftwareForSearchTerm(searchTerm: searchTerm) { resultArray, error in
+                if let resultArray = resultArray {
+                    self.appListTableCellData = resultArray
+                    self.unfilteredAppListTableCellData = resultArray
+                    
+                    DispatchQueue.main.async {
+                        self.appResultTableView.reloadData()
+                    }
+                } else if let error = error {
+                    print(error)
+                }
+            }
+        }
+    }
+    
+    private func filterGenre(_ prefilter: [iTunesSearchResultModel], genre: GenresFilters) -> [iTunesSearchResultModel] {
+        var filteredResult = prefilter
+        
+        filteredResult = filteredResult.filter({
+            $0.primaryGenreName == genre.description
+        })
+        
+        return filteredResult
+    }
+    
+    private func filterPrice(_ prefilter: [iTunesSearchResultModel], price: AppPriceFilter) -> [iTunesSearchResultModel] {
+        var filteredResult = prefilter
+        
+        if price == .free {
+            filteredResult = filteredResult.filter({
+                $0.formattedPrice == price.description
+            })
+        } else if price == .paid {
+            filteredResult = filteredResult.filter({
+                $0.price > 0.00
+            })
+        }
+        
+        return filteredResult
+    }
+    
+    // MARK: Views
     
     private var searchController: UISearchController!
     private var appResultTableView: UITableView!
